@@ -42,7 +42,7 @@ class Labeller:
 @click.option('--end', help='End row index.', type=int)
 def main(start, end):
     """
-    A script that allows interactive labelling of a dataset. It saves a copy of the newly labelled dataset into labelled/dataset  
+    A script that allows interactive labelling of a dataset. It saves a copy of the newly labelled dataset into the labelled_dataset folder  
     """
     labeller = Labeller(DATASET, start, end)
     labeller.write_labels_interactively("review_body", "food_safety_flag")
