@@ -13,7 +13,7 @@ class Labeller:
         self.end = end
         self.size = start-end
         self.dataset_path = dataset_path
-        self.dataset = self._parse_dataset(copy,)
+        self.dataset = self._parse_dataset(copy)
 
     def save(self, output_folder):
         name = f"{self.start}-{self.end}_reviews.csv"
@@ -31,7 +31,7 @@ class Labeller:
 
         self.dataset[label_column_name] = labels
 
-    def _parse_dataset(self, copy=True, **kwargs):
+    def _parse_dataset(self, copy=True):
         chunk = pd.read_table(self.dataset_path,  error_bad_lines=False,
                               skiprows=range(1, self.start), nrows=self.end-self.start+1, header=0)
         return chunk.copy() if copy else chunk
