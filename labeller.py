@@ -4,6 +4,7 @@ import click
 
 
 DATASET = "amazon_reviews_us_Grocery_v1_00.tsv"
+OUTPUT_FOLDER = "labelled_dataset"
 
 
 class Labeller:
@@ -45,7 +46,7 @@ def main(start, end):
     """
     labeller = Labeller(DATASET, start, end)
     labeller.write_labels_interactively("review_body", "food_safety_flag")
-    labeller.save("labelled_dataset")
+    labeller.save(OUTPUT_FOLDER)
 
 
 if __name__ == "__main__":
