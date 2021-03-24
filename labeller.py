@@ -3,7 +3,7 @@ from rich.console import Console
 import click
 
 
-DATASET = "amazon_reviews_us_Grocery_v1_00.tsv"
+DATASET = "" # path to the negative dataset csv 
 OUTPUT_FOLDER = "labelled_dataset"
 
 
