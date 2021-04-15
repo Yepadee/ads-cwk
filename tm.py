@@ -1,12 +1,16 @@
 import pandas as pd
+from time import time
 from nltk.sentiment import SentimentIntensityAnalyzer
 
 DATASET = "amazon_reviews_us_Grocery_v1_00.tsv"
+
+rtime = time()
 
 print("loading dataset...")
 ds = pd.read_table(DATASET, error_bad_lines=False, header=0, warn_bad_lines=False)
 print("done!")
 
+# Drop null rows
 ds = ds.dropna()
 
 sia = SentimentIntensityAnalyzer()
@@ -22,4 +26,5 @@ print("done!")
 
 ds.to_csv("sentiment_ds.csv")
 
-print(ds)
+rtime = time() - rtime
+print("The program ran in", rtime, "seconds")
