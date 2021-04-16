@@ -139,3 +139,5 @@ cython_debug/
 
 *.tsv 
 sentiment_ds.csv
+
+model20/
