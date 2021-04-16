@@ -2,7 +2,7 @@
 
 #PBS -N racing-sim
 #PBS -j oe
-#PBS -o output/topic-modelling.out
+#PBS -o output/topic-modelling60.out
 #PBS -q clxq
 #PBS -l walltime=24:00:00
 
@@ -17,4 +17,4 @@ echo "This jobs runs on the following machines: $(cat "$PBS_NODEFILE" | uniq)"
 echo
 
 # Run the executable
-python3.6 topic-modelling.py
+python3.6 topic-modelling.py 60

@@ -1,11 +1,14 @@
 import pandas as pd
 from time import time
+import sys
 
 from nltk.stem import WordNetLemmatizer
 from gensim.parsing.preprocessing import STOPWORDS
 import gensim
 
 DATASET = "amazon_reviews_us_Grocery_v1_00.tsv"
+
+n_topics = sys.argv[1]
 
 rtime = time()
 
@@ -27,7 +30,7 @@ def preprocess(text):
 
 
 reviews = ds["review_body"]
-less_reviews = reviews[:1000]
+less_reviews = reviews
 processed = []
 for review in less_reviews:
     processed.append(preprocess(review))
@@ -37,11 +40,11 @@ dictionary = gensim.corpora.Dictionary(processed) # construct word<->id mappings
 bow_corpus = [dictionary.doc2bow(review) for review in processed]
 
 lda_model =  gensim.models.LdaModel(bow_corpus, 
-                                   num_topics=20, 
+                                   num_topics=n_topics, 
                                    id2word=dictionary,                                    
                                    passes=10,
                                    ) 
-lda_model.save('model2/lda.model')
+lda_model.save(f'model{n_topics}/lda.model')
 
 rtime = time() - rtime
 print("The program ran in", rtime, "seconds")

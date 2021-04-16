@@ -141,3 +141,10 @@ cython_debug/
 
 *.tsv
 *.gz
+output/
+model10/
+model20/
+model30/
+model40/
+model50/
+model60/
