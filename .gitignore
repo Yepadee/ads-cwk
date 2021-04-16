@@ -142,6 +142,7 @@ cython_debug/
 *.tsv
 *.gz
 output/
+model/
 model10/
 model20/
 model30/
