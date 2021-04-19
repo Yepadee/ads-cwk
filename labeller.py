@@ -3,7 +3,7 @@ from rich.console import Console
 import click
 
 
-DATASET = "" # path to the negative dataset csv 
+DATASET = "bad_reviews_refined.csv" # path to the negative dataset csv 
 OUTPUT_FOLDER = "labelled_dataset"
 
 
@@ -13,7 +13,7 @@ class Labeller:
         self.end = end
         self.size = start-end
         self.dataset_path = dataset_path
-        self.dataset = self._parse_dataset(copy)
+        self.dataset = pd.read_csv(DATASET)
 
     def save(self, output_folder):
         name = f"{self.start}-{self.end}_reviews.csv"
@@ -23,13 +23,17 @@ class Labeller:
     def write_labels_interactively(self, feature_column_name, label_column_name):
         labels = []
         console = Console()
-        for (_, row) in self.dataset.iterrows():
-            feature = row[feature_column_name]
-            label = console.input(f"[bold red]{feature}?")
-            console.print(f"[bold green]--------------------------------")
-            labels.append(label)
+        k = self.dataset.iloc[2]
+        print(k)
 
-        self.dataset[label_column_name] = labels
+        for i in range(self.start, self.end+1):
+            row = self.dataset.iloc[i]
+            feature = row[feature_column_name]
+            label = console.input(f"[bold yellow] {feature_column_name } [bold red]{feature}?")
+            console.print(f"[bold green]--------------------------------")
+            self.dataset.at[i, label_column_name] = label
+
+        
 
     def _parse_dataset(self, copy=True):
         chunk = pd.read_table(self.dataset_path,  error_bad_lines=False,
@@ -45,7 +49,7 @@ def main(start, end):
     A script that allows interactive labelling of a dataset. It saves a copy of the newly labelled dataset into the labelled_dataset folder  
     """
     labeller = Labeller(DATASET, start, end)
-    labeller.write_labels_interactively("review_body", "food_safety_flag")
+    labeller.write_labels_interactively("review_headline", "food_safety_flag")
     labeller.save(OUTPUT_FOLDER)
 
 
