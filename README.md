@@ -2,7 +2,7 @@
 
 ### Video Presentation 
 
-Our presentation primarily consists of 4 parts: data wrangling, topic modelling, sentiment analysis and supervised learning. Instead of preparing one monolithic video covering all parts,  we have split up the presentation into into 2-3 min video chunks highlighting each part. We believe this will make it easier to understand, test, and verify our findings. The videos should be watched in order as the build on each other. 
+Our presentation primarily consists of 4 parts: data wrangling, topic modelling, sentiment analysis and supervised learning. Instead of preparing one monolithic video covering all parts,  we have split up the presentation into into 2-3 min video chunks highlighting each part. We believe this will make it easier to understand, test, and verify our findings. The videos should be watched in order as they build on each other. 
 
 ### Data Wrangling 
 - **Summary**:
