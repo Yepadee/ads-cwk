@@ -22,6 +22,9 @@ Our presentation primarily consists of 4 parts: data wrangling, topic modelling,
 
 
 ### Supervised Learning 
-- **Summary**: To performed supervised learning, we needed to label the curently unlabelled dataset. Building on the findings from the data wrangling/sentiment analysis, we devised a way to efficiently label the dataset in a way that didn't require us to manually label all 2 million entries.  We then vectorized the data, performed additional optimizations,  and finally plugged the data into supervised learning models 
+- **Summary**: 
+   - To perform supervised learning, we needed to label the curently unlabelled dataset. Building on the findings from the data wrangling/sentiment analysis, we devised a way to efficiently label the dataset in a way that didn't require us to manually label all 2 million entries.  We then vectorized the data, performed additional optimizations,  and finally plugged the data into supervised learning models.
+  - We plan to improve the result of the models by analysing confusion matrices, performing grid-search to determine optimal hyperparamters, and assessing feature-importance histograms to interpret the behaviour of the models.  
+
 - **Link to video**
 -  **Notebook**
