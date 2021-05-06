@@ -2,8 +2,8 @@
 
 #PBS -N racing-sim
 #PBS -j oe
-#PBS -o output/h-topic-modelling10.out
-#PBS -q a64fx -lselect=1:ncpus=48
+#PBS -o output/topic-modelling60.out
+#PBS -q clxq
 #PBS -l walltime=24:00:00
 
 # Change the working directory (default is home directory)
@@ -17,4 +17,4 @@ echo "This jobs runs on the following machines: $(cat "$PBS_NODEFILE" | uniq)"
 echo
 
 # Run the executable
-python3.6 topic-modelling.py 10
+python3.6 topic-modelling.py 60
