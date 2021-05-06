@@ -137,4 +137,6 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-*.tsv 
+*.tsv
+.vscode/settings.json
+job_submit.pbs
