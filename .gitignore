@@ -139,3 +139,12 @@ cython_debug/
 
 *.tsv 
 sentiment_ds.csv
+*.zip
+*.gz
+bow_corpus.txt
+sa_bow_corpus.txt
+
+h_models/
+models/
+html/
+sa_h_models/
