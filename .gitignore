@@ -139,6 +139,7 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+<<<<<<< HEAD
 *.tsv
 *.gz
 output/
@@ -157,3 +158,9 @@ h_model30/
 h_model40/
 h_model50/
 h_model60/
+=======
+*.tsv 
+sentiment_ds.csv
+
+model20/
+>>>>>>> supervised

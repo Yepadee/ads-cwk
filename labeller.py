@@ -3,7 +3,7 @@ from rich.console import Console
 import click
 
 
-DATASET = "" # path to the negative dataset csv 
+DATASET = "bad_reviews_refined.csv" # path to the negative dataset csv 
 OUTPUT_FOLDER = "labelled_dataset"
 
 
@@ -13,28 +13,35 @@ class Labeller:
         self.end = end
         self.size = start-end
         self.dataset_path = dataset_path
-        self.dataset = self._parse_dataset(copy)
+        self.dataset = pd.read_csv(DATASET)
+        self.dataset = self._parse_dataset()
 
     def save(self, output_folder):
         name = f"{self.start}-{self.end}_reviews.csv"
         with open(f"{output_folder}/{name}", "w") as text_file:
             text_file.write(self.dataset.to_csv(index=False))
 
-    def write_labels_interactively(self, feature_column_name, label_column_name):
+    def write_labels_interactively(self, feature_column_names, label_column_name):
         labels = []
         console = Console()
-        for (_, row) in self.dataset.iterrows():
-            feature = row[feature_column_name]
-            label = console.input(f"[bold red]{feature}?")
+        for i, row in self.dataset.iterrows():
             console.print(f"[bold green]--------------------------------")
-            labels.append(label)
+            for feature_name in feature_column_names:
+                feature = row[feature_name]
+                console.print(f"[bold yellow] {feature_name} [bold red]{feature}?")
 
-        self.dataset[label_column_name] = labels
+            console.print(f"[bold green]--------------------------------")
+            label = console.input(f"[bold blue] Food safety issue (1) or not (0)?")
+            self.dataset.at[i, label_column_name] = label
+        
 
-    def _parse_dataset(self, copy=True):
-        chunk = pd.read_table(self.dataset_path,  error_bad_lines=False,
-                              skiprows=range(1, self.start), nrows=self.end-self.start+1, header=0)
-        return chunk.copy() if copy else chunk
+    def _parse_dataset(self):
+        df = pd.read_csv(DATASET)
+        sliced_df = pd.DataFrame(columns=df.columns)
+        for i in range(self.start, self.end):
+            sliced_df.loc[i] = df.loc[i]
+        return sliced_df
+
 
 
 @click.command()
@@ -45,7 +52,7 @@ def main(start, end):
     A script that allows interactive labelling of a dataset. It saves a copy of the newly labelled dataset into the labelled_dataset folder  
     """
     labeller = Labeller(DATASET, start, end)
-    labeller.write_labels_interactively("review_body", "food_safety_flag")
+    labeller.write_labels_interactively(["review_headline", "review_body", "sentiment_score"], "food_safety_flag")
     labeller.save(OUTPUT_FOLDER)
 
 
